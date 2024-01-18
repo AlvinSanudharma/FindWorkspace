@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": ["src/*"],
+      "@/*": ["src/*"],
       "@app": ["App.tsx"],
       "@assets/*": ["assets/*"]
     }

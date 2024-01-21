@@ -1,17 +1,14 @@
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import Button from '@/components/Button';
 import {RootStackParamList} from '@app';
 import {useNavigation} from '@react-navigation/native';
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Home'
->;
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>

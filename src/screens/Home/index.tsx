@@ -1,5 +1,6 @@
 import { colors } from "@/assets/styles/Colors";
 import { Gs } from "@/assets/styles/GlobalStyle";
+import InputText from "@/src/components/InputText";
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -33,11 +34,22 @@ const Home = (props: Props) => {
     );
   };
 
+  const renderSearch = () => {
+    return (
+      <View style={styles.sectionContainer}>
+        <InputText
+          icon={require("../../../assets/icons/location.png")}
+          placeholder="Find work spaces in Jakarta"
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View>
         {renderHeader()}
-        {/* {renderSearch()} */}
+        {renderSearch()}
         <ScrollView>
           {/* {renderPopularSection()} */}
           {/* {renderNewsorthy()} */}
@@ -63,10 +75,15 @@ const styles = StyleSheet.create({
   profileContainer: {
     width: 50,
     height: 50,
+    marginRight: 10,
   },
   iconContainer: {
     width: 24,
     height: 24,
     marginLeft: 10,
+  },
+  sectionContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 24,
   },
 });

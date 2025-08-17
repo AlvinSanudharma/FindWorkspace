@@ -1,12 +1,37 @@
 import { colors } from "@/assets/styles/Colors";
 import { Gs } from "@/assets/styles/GlobalStyle";
 import InputText from "@/src/components/InputText";
+import NewsworthyItem from "@/src/components/NewsworthyItem";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 type Props = {};
 
 const Home = (props: Props) => {
+  const handlePress = () => {};
+
+  const newsworthyData = [
+    {
+      title: "Hajime",
+      address: "Pantai Utara No. 98",
+      price: "$421/day",
+      image: require("../../../assets/images/item_2_a.png"),
+    },
+    {
+      title: "DeepWork",
+      address: "Pantai Selatan No. 1",
+      price: "$500/day",
+      image: require("../../../assets/images/item_3_a.png"),
+    },
+  ];
+
   const renderHeader = () => {
     return (
       <View style={styles.headerContainer}>
@@ -78,14 +103,44 @@ const Home = (props: Props) => {
     );
   };
 
+  const renderNewsworthy = () => {
+    return (
+      <View>
+        <View
+          style={{
+            paddingHorizontal: 24,
+          }}
+        >
+          <Text style={[styles.sectionTitle, Gs.h1]}>Newsworthy</Text>
+        </View>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={newsworthyData}
+          keyExtractor={(item) => item.title}
+          renderItem={({ item, index }) => (
+            <NewsworthyItem
+              title={item.title}
+              address={item.address}
+              image={item.image}
+              onPress={handlePress}
+              price={item.price}
+              isFirst={index === 0}
+            />
+          )}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.contentContainer}>
         {renderHeader()}
         {renderSearch()}
-        <ScrollView>
+        <ScrollView style={styles.scrollContainer}>
           {renderPopularSection()}
-          {/* {renderNewsorthy()} */}
+          {renderNewsworthy()}
         </ScrollView>
       </View>
     </View>
@@ -99,12 +154,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.greyLight,
   },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
+  },
   headerContainer: {
     ...Gs.flexRow,
     ...Gs.itemsCenter,
     ...Gs.justifyBetween,
     padding: 24,
   },
+
   profileContainer: {
     width: 50,
     height: 50,
@@ -150,5 +212,8 @@ const styles = StyleSheet.create({
   popularPriceLabel: {
     ...Gs.font600,
     ...Gs.textPrimary,
+  },
+  scrollContainer: {
+    height: "100%",
   },
 });
